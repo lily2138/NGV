@@ -11,7 +11,7 @@
 | TPL-SWE5-003 | XLSX | `ENG-SWE5-003_SW 통합시험 결과서.xlsx` | Test ID/Trace/Result/Actual Result/Evidence Locator/Defect ID/Disposition |
 
 - 파일명은 `<산출물 ID>_<산출물명>.<확장자>` 형식을 따른다. xlsx는 안내용 빈 행(보통 10행) 이전을 건드리지 않고 그 이후에 실제 데이터를 추가한다.
-- 저장 위치: `architecture-designer`/`detailed-designer` 산출물과 동일한 완성 산출물 폴더에 둔다. 정해지지 않았으면 사용자에게 확인한다.
+- 저장 위치: `CLAUDE.md`의 "완성 산출물 저장 규칙"에 따라 `deliverables/engineering/SoftwareComponentVerificationAndIntegrationVerification/`에 저장한다.
 
 ## 2. TPL-SWE5-001 (SW 통합전략 및 통합시험 명세서) 목차 구조 — 반드시 이 순서/제목을 유지
 

@@ -44,6 +44,6 @@ description: 시스템/소프트웨어 요구사항을 분석하고 작성하는
 
 ## 출력 시 유의사항
 
-- 모든 요구사항 문서(docx), 다이어그램 원본(drawio), RTM(xlsx)은 `WP_Templates`에서 복사한 실제 템플릿 형식 그대로, `PRC-TPL-001` 등록부의 명명 규칙(`<산출물 ID>_<산출물명>.<확장자>`)에 맞춰 저장한다. 완성 산출물을 담을 저장소 폴더가 없으면 임의로 새로 만들지 말고 사용자에게 위치를 확인한다.
+- 모든 요구사항 문서(docx), 다이어그램 원본(drawio), RTM(xlsx)은 `WP_Templates`에서 복사한 실제 템플릿 형식 그대로, `PRC-TPL-001` 등록부의 명명 규칙(`<산출물 ID>_<산출물명>.<확장자>`)과 `CLAUDE.md`의 "완성 산출물 저장 규칙"(`deliverables/engineering/SoftwareRequirementsAnalysis/`, RTM은 `deliverables/engineering/Traceability/`)에 맞춰 저장한다.
 - 요구사항을 짓지 말 것: 입력 근거가 없는 요구사항은 만들지 말고, 부족한 정보는 사용자에게 질문한다.
 - 이 스킬의 결과물은 공식 안전성 인증/A-SPICE 심사 판정이 아니라 초안/분석 지원임을 명시한다.

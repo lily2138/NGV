@@ -17,7 +17,7 @@
 | TPL-SBOM-001 (선택, 외부/오픈소스 의존성이 있을 때) | XLSX | `ENG-SBOM-001_Python 의존성·SBOM·FOSS 라이선스 목록.xlsx` | Package/Version/Dependency Type/SPDX/Evidence/Distribution |
 
 - 실제 파일명은 `<산출물 ID>_<산출물명>.<확장자>` 형식을 따른다.
-- 저장 위치: `architecture-designer`가 만든 SWE.2 산출물과 동일한 완성 산출물 폴더에 둔다. 아직 그 위치가 정해지지 않았다면 사용자에게 확인한다 (임의로 새 폴더 구조를 만들지 않는다).
+- 저장 위치: `CLAUDE.md`의 "완성 산출물 저장 규칙"에 따라 `deliverables/engineering/SoftwareDetailedDesignAndUnitConstruction/`에 저장한다.
 - 베이스라인 시 drawio에서 PNG를 함께 내보낸다 (README 규칙).
 
 ## 2. TPL-SWE3-001 (SW 상세설계서) 목차 구조 — 반드시 이 순서/제목을 유지
