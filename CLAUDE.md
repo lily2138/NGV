@@ -23,6 +23,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 이 프로젝트는 **반드시** 분석, 설계, 구현, 테스트의 순서로 개발을 진행한다.
 - 각 단계가 완료되었을 때, 지정된 템플릿을 이용한 산출물이 생성되어야 한다. 
 
+### 완성 산출물 저장 규칙
+
+- `WP_Templates/`는 빈 양식(템플릿) 전용이며 수정하지 않는다. 실제로 작성한 산출물은 아래 위치에 저장한다.
+  - 문서/다이어그램: `deliverables/engineering/<WP_Templates와 동일한 프로세스 폴더명>/` (예: `deliverables/engineering/SoftwareRequirementsAnalysis/ENG-SWE1-001_SW 요구사항 명세서.docx`)
+  - 소스코드: `src/`
+  - 테스트 코드: `tests/`
+- 파일명은 `PRC-TPL-001` 등록부의 명명 규칙(`<산출물 ID>_<산출물명>.<확장자>`)을 그대로 따른다.
+
 ### 분석 지침
 
 - 요구사항 분석 단계 수행은 requirements-analyst 서브에이전트가 담당한다.

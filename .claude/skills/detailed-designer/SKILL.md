@@ -38,6 +38,6 @@ description: 소프트웨어 상세설계(SWE.3)를 작성하는 스킬입니다
 
 ## 출력 시 유의사항
 
-- 문서(docx)/다이어그램(drawio)/RTM(xlsx)은 `WP_Templates`에서 복사한 실제 템플릿 형식 그대로, `PRC-TPL-001` 등록부의 명명 규칙에 맞춰 저장한다. 저장 위치가 정해지지 않았으면 사용자에게 확인한다.
+- 문서(docx)/다이어그램(drawio)/RTM(xlsx)은 `WP_Templates`에서 복사한 실제 템플릿 형식 그대로, `PRC-TPL-001` 등록부의 명명 규칙과 `CLAUDE.md`의 "완성 산출물 저장 규칙"(`deliverables/engineering/SoftwareDetailedDesignAndUnitConstruction/`)에 맞춰 저장한다.
 - 산출물을 지어내지 않는다 — 입력 아키텍처/요구사항 근거가 없는 설계 요소를 만들지 말고, 불확실한 부분은 질문하거나 "확인 필요"로 표시한다.
 - 이 스킬의 결과물은 초안/설계 지원이며, 공식 A-SPICE 심사나 ISO 26262 인증 판정이 아님을 명시한다.

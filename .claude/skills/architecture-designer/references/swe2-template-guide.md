@@ -16,7 +16,7 @@
 | TPL-SWE2-002 | DRAWIO | `ENG-SWE2-002_SW 아키텍처 UML 원본.drawio` | (위와 동일 산출물 세트의 다이어그램 원본) |
 
 - 실제 파일명은 반드시 `<산출물 ID>_<산출물명>.<확장자>` 형식을 따른다 (등록부의 "적용 산출물" 컬럼 표기 참고).
-- 저장 위치: 저장소에 완성 산출물을 담는 폴더(예: `02_Tier/02_WorkProduct/doc/engineering/...` 형태)가 아직 없다면, 임의로 새 폴더 구조를 만들지 말고 사용자에게 저장 위치를 확인한다.
+- 저장 위치: `CLAUDE.md`의 "완성 산출물 저장 규칙"에 따라 `deliverables/engineering/SoftwareArchitecturalDesign/`에 저장한다.
 - 베이스라인을 만들 때는 drawio에서 PNG를 함께 내보내 리뷰본/베이스라인에 첨부한다 (README 규칙).
 
 ## 2. TPL-SWE2-001 (SW 아키텍처 설계서) 목차 구조 — 반드시 이 순서/제목을 유지
