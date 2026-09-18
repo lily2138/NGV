@@ -1,0 +1,100 @@
+name: CI
+
+# CLAUDE.md에 정의된 각 단계(구현/단위테스트)의 품질·커버리지 게이트를 PR마다 자동 검증한다.
+# 도구 옵션은 버전에 따라 달라질 수 있으므로, 실패 원인이 도구 자체의 옵션 변경으로 보이면
+# .claude/skills/coding/references/python-quality-metrics.md와 대조 확인한다.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  quality-and-tests:
+    name: quality-and-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Detect Python sources
+        id: detect
+        run: |
+          if git ls-files -- '*.py' | grep -q . ; then
+            echo "hasPython=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "hasPython=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: No Python sources yet
+        if: steps.detect.outputs.hasPython == 'false'
+        run: echo "저장소에 아직 .py 소스가 없습니다 — 품질/테스트 게이트를 건너뜁니다. 코드가 추가되면 이 워크플로가 자동으로 검증을 시작합니다."
+
+      - name: Install quality tools (오픈소스, CLAUDE.md 구현 지침)
+        if: steps.detect.outputs.hasPython == 'true'
+        run: pip install lizard pylint radon coverage
+
+      - name: 함수 라인수(순수 코드) ≤ 50, 순환복잡도 ≤ 10 (lizard)
+        if: steps.detect.outputs.hasPython == 'true'
+        run: lizard -l python -L 50 -C 10 -n 0 .
+
+      - name: 중복 코드 8라인 미만 (pylint duplicate-code)
+        if: steps.detect.outputs.hasPython == 'true'
+        run: pylint --disable=all --enable=duplicate-code --min-similarity-lines=8 $(git ls-files -- '*.py')
+
+      - name: 함수/변수명 3자 이상 camelCase (pylint naming)
+        if: steps.detect.outputs.hasPython == 'true'
+        run: |
+          cat > .pylintrc.ci <<'EOF'
+          [BASIC]
+          function-rgx=^[a-z][a-zA-Z0-9]{2,}$
+          variable-rgx=^[a-z][a-zA-Z0-9]{2,}$
+          argument-rgx=^[a-z][a-zA-Z0-9]{2,}$
+          EOF
+          pylint --rcfile=.pylintrc.ci --disable=all --enable=invalid-name $(git ls-files -- '*.py')
+
+      - name: Doxygen 주석 비율 ≥ 20% (radon raw)
+        if: steps.detect.outputs.hasPython == 'true'
+        run: |
+          python - <<'EOF'
+          import json
+          import subprocess
+          import sys
+
+          files = subprocess.run(
+              ["git", "ls-files", "--", "*.py"], capture_output=True, text=True, check=True
+          ).stdout.split()
+
+          failed = False
+          for path in files:
+              raw = subprocess.run(
+                  ["radon", "raw", "-j", path], capture_output=True, text=True, check=True
+              ).stdout
+              metrics = json.loads(raw)[path]
+              comments = metrics["comments"]
+              sloc = metrics["sloc"]
+              total = comments + sloc
+              ratio = (comments / total * 100) if total else 100.0
+              print(f"{path}: comment ratio {ratio:.1f}%")
+              if ratio < 20.0:
+                  print(f"::error file={path}::comment ratio {ratio:.1f}% is below the required 20%")
+                  failed = True
+
+          sys.exit(1 if failed else 0)
+          EOF
+
+      - name: 단위테스트 + Branch 커버리지 100% (coverage.py)
+        if: steps.detect.outputs.hasPython == 'true'
+        run: |
+          coverage run --branch -m unittest discover -p "test_*.py"
+          coverage report -m --fail-under=100
+
+      - name: 통합시험 함수/콜 커버리지 100% (integration-tester, 구성된 경우)
+        if: hashFiles('tools/measureFunctionCallCoverage.py') != ''
+        run: echo "tools/measureFunctionCallCoverage.py 발견 — integration-tester 스킬의 절차에 따라 대상 컴포넌트별로 실행하고 100%를 확인한다."

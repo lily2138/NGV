@@ -12,6 +12,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개발 정책
 
+### Git 브랜치·PR·CI 정책
+
+- `main`은 보호된 브랜치이며 직접 push를 금지한다. 모든 변경은 브랜치 + PR + CI 통과를 거쳐 병합한다.
+- 자세한 브랜치 명명 규칙, 리뷰/병합 규칙, AI 생성 코드에 대한 규칙은 `CONTRIBUTING.md`를 따른다.
+- PR마다 `.github/workflows/ci.yml`이 자동 실행되어 아래 각 단계 지침의 품질·커버리지 게이트를 검증한다.
+
 ### 개발 생명 주기
 
 - 이 프로젝트는 **반드시** 분석, 설계, 구현, 테스트의 순서로 개발을 진행한다.
